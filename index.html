@@ -1,456 +1,172 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta name="google-site-verification" content="MVta7fYIufFXDOm8V4xosjfixFWA8pgXkMYCqivCvJE" />
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-  <link rel="shortcut icon" href="favicon.ico">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="android-chrome-512x512.png">
-  <link rel="manifest" href="site.webmanifest">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>FILMBOX</title>
-  <meta name="description" content="Vive el cine sin límites en FILMBOX. Mira películas y series gratis en línea con los mejores estrenos, acción y suspenso.">
-<style>
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #111;
-    color: #fff;
-    overflow-x: hidden;
-  }
-  header {
-    position: sticky;
-    top: 0;
-    background-color: rgba(17,17,17,0.95);
-    padding: 10px 20px;
-    display: flex;
-    align-items: center;
-    z-index: 100;
-  }
-  header .logo {
-    font-size: 20px;
-    font-weight: bold;
-    color: #e81c1c;
-    margin-right: 15px;
-  }
-  header input {
-    flex: 1;
-    padding: 8px 12px;
-    border-radius: 20px;
-    border: none;
-    outline: none;
-    background: #222;
-    color: #ffffff;
-    transition: all 0.3s;
-  }
-  header input:focus {
-    box-shadow: 0 0 0 2px #e81c1c;
-    background: #333;
-  }
-  .category-section {
-    margin-bottom: 20px;
-  }
-  .category-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #fff;
-    margin-bottom: 10px;
-    padding: 0 10px;
-    border-left: 4px solid #e81c1c;
-    padding-left: 15px;
-  }
-  .movies-list {
-    display: flex;
-    overflow-x: scroll;
-    padding: 0 10px 20px 10px; 
-    gap: 10px;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    min-height: 180px; 
-    background-color: #1a1a1a;
-    border-radius: 6px;
-  }
-  .movies-list::-webkit-scrollbar {
-    display: none;
-  }
-  .movies-list {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  #searchResults {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 10px;
-    padding: 10px; 
-    width: 100%;
-    box-sizing: border-box;
-  }
-  .movie-card {
-    position: relative;
-    background-size: cover;
-    background-position: center;
-    aspect-ratio: 2/3;
-    border-radius: 6px;
-    cursor: pointer;
-    display: block;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-decoration: none;
-    flex-shrink: 0; 
-    width: 120px; 
-  }
-  #searchResults .movie-card {
-      width: 100%;
-      flex-shrink: 1; 
-  }
-  .movie-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px rgba(232, 28, 28, 0.7);
-  }
-  .movie-card .quality-tag {
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    background-color: #e81c1c;
-    color: #fff;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 3px 6px;
-    border-radius: 4px;
-    z-index: 10;
-  }
-  @media (min-width: 600px) {
-    .movies-list .movie-card {
-        width: 150px;
+
+  <meta name="description" content="Vive el cine sin límites en FILMBOX. Mira películas y series gratis en línea.">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #fff;
     }
-    .category-title {
-      padding: 0 20px;
-    }
-    .movies-list {
-      padding: 0 20px 20px 20px;
-    }
-    #searchResults {
-      padding: 20px;
-    }
+
     header {
-      padding: 15px 30px;
+      position: sticky;
+      top: 0;
+      background-color: rgba(17,17,17,0.9);
+      padding: 10px 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 100;
     }
-  }
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-  .marquee {
-    width: 100%;
-    overflow: hidden;
-    background: #e50914; 
-    color: #fff;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 8px 0;
-    white-space: nowrap;
-    margin-top: 10px; 
-    border-radius: 6px; 
-  }
-  .marquee span {
-    display: inline-block;
-    padding-left: 100%;
-    animation: scroll 12s linear infinite;
-  }
-  @keyframes scroll {
-    0%   { transform: translateX(0); }
-    100% { transform: translateX(-100%); }
-  }
-</style>
+
+    header .logo {
+      font-size: 20px;
+      font-weight: bold;
+      color: #e81c1c;
+      white-space: nowrap;
+    }
+
+    header input {
+      flex: 1;
+      padding: 8px 12px;
+      border-radius: 20px;
+      border: none;
+      outline: none;
+      background: #222;
+      color: #fff;
+    }
+
+    /* ✅ CONTADOR */
+    .total-count {
+      font-size: 13px;
+      color: #aaa;
+      white-space: nowrap;
+    }
+
+    .movies {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      padding: 10px;
+    }
+
+    .movie-card {
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      aspect-ratio: 2/3;
+      border-radius: 6px;
+      cursor: pointer;
+      display: block;
+      text-decoration: none;
+      transition: transform 0.3s ease;
+    }
+
+    .movie-card:hover {
+      transform: scale(1.05);
+    }
+
+    .quality-tag {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: #e81c1c;
+      font-size: 12px;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    .marquee {
+      width: 100%;
+      overflow: hidden;
+      background: #e50914;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 8px 0;
+      white-space: nowrap;
+    }
+
+    .marquee span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll 12s linear infinite;
+    }
+
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+  </style>
 </head>
+
 <body>
-  
-<div id="loader" style="
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  z-index: 9999;
-">
-  <div style="
-    width: 60px;
-    height: 60px;
-    border: 4px solid #fff;
-    border-top: 4px solid #e50914; 
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-  "></div>
-  <div style="
-    color: #aaa;
-    margin-top: 8px;
-    font-family: Arial, sans-serif;
-    font-size: 12px;
-    letter-spacing: 0.5px;
-  ">
-    CARGANDO NUESTRO CONTENIDO
-  </div>
-</div>
-
-<script>
-  window.addEventListener("load", function() {
-    const loader = document.getElementById("loader");
-
-    if (sessionStorage.getItem("loaderShown")) {
-      loader.style.display = 'none';
-      return;
-    }
-    
-    // Oculta el loader después de un tiempo
-    setTimeout(() => {
-      loader.style.transition = "opacity 1s ease";
-      loader.style.opacity = 0;
-      setTimeout(() => {
-        loader.style.display = 'none';
-      }, 1000);
-    }, 3000); 
-
-    sessionStorage.setItem("loaderShown", "true");
-  });
-</script>
 
 <header>
   <div class="logo">FILMBOX</div>
-  <input type="text" id="search" placeholder="Buscar películas...">
+  <input type="text" id="search" placeholder="Buscar...">
+  <!-- ✅ CONTADOR -->
+  <span id="totalCount" class="total-count">0 títulos</span>
 </header>
-  
+
 <div class="marquee">
-  <span>⚡  🌐 VISITA FILMBOX.LAT </span>
+  <span>MEJORANDO NUESTROS SERVICIOS</span>
 </div>
 
-<div id="mainContent">
-  <p style="text-align: center; color: #999; padding: 20px;">Cargando categorías...</p>
-</div>
-
-<div id="searchResults" style="display: none;">
-  </div>
+<section class="movies" id="movieList"></section>
 
 <script>
-  let allMoviesData = []; 
-  const categoriesOrder = ["EN TENDENCIA", "TERROR", "ACCIÓN", "SUSPENSO", "COMEDIA"];
-  let structuredMoviesData = {}; 
-  
-  categoriesOrder.forEach(cat => { structuredMoviesData[cat] = []; });
-
-  const mainContent = document.getElementById('mainContent');
+  const movieList = document.getElementById('movieList');
   const searchInput = document.getElementById('search');
-  const searchResults = document.getElementById('searchResults');
+  const totalCount = document.getElementById('totalCount');
 
-  /**
-   * Determina la categoría de una película (Heurística).
-   */
-  function determineCategory(movie) {
-      const title = movie.title.toLowerCase();
-      // Prioridad 1: TERROR / HORROR
-      if (
-          title.includes('terrifier') || title.includes('masacre') ||
-          title.includes('conjuro') || title.includes('slender') ||
-          title.includes('halloween') || title.includes('freddys') ||
-          title.includes('exorcismo') || title.includes('frankenstein') ||
-          title.includes('terror') || title.includes('sangriento') ||
-          title.includes('payaso') || title.includes('criatura voraz') ||
-          title.includes('infierno') || title.includes('mono') ||
-          title.includes('megan') || title.includes('it bienvenidos aderry')
-      ) {
-          return "TERROR";
-      }
-      // Prioridad 2: ACCIÓN / CIENCIA FICCIÓN
-      if (
-          title.includes('depredador') || title.includes('tron') ||
-          title.includes('godzilla') || title.includes('kong') ||
-          title.includes('thunderbolts') || title.includes('superman') ||
-          title.includes('jurassic') || title.includes('batman') ||
-          title.includes('demon slayder') || title.includes('contraataque') ||
-          title.includes('f1') || title.includes('megalodón') ||
-          title.includes('alien') || title.includes('nadie 2')
-      ) {
-          return "ACCIÓN";
-      }
-      // Prioridad 3: SUSPENSO / DRAMA / THRILLER
-      if (
-          title.includes('culpa') || title.includes('elixir') ||
-          title.includes('him el elegido') || title.includes('steve') ||
-          title.includes('atrapado') || title.includes('mantis') ||
-          title.includes('muro negro') || title.includes('destino final') ||
-          title.includes('ultimo aliento') || title.includes('ultimo respiro') ||
-          title.includes('sustancia') || title.includes('cleaner') ||
-          title.includes('juego del calamar') || title.includes('desaparición') ||
-          title.includes('el otro paris')
-      ) {
-          return "SUSPENSO";
-      }
-      // Prioridad 4: COMEDIA / ANIMACIÓN / INFANTIL
-      if (
-          title.includes('padre no hay mas que uno') || title.includes('nacho libre') ||
-          title.includes('coco') || title.includes('pájaro loco') ||
-          title.includes('sonic') || title.includes('cars') ||
-          title.includes('gru') || title.includes('villano favorito') ||
-          title.includes('tipos malos') || title.includes('increíbles') ||
-          title.includes('zootopia') || title.includes('garfield') ||
-          title.includes('lilo y stitch') || title.includes('dragón') ||
-          title.includes('pitufos') || title.includes('venganza de popeye') ||
-          title.includes('ready player one') 
-      ) {
-          return "COMEDIA";
-      }
-      // Por defecto
-      return "EN TENDENCIA"; 
-  }
+  let moviesData = [];
 
-  /**
-   * Carga los datos del JSON externo (Peliculas.json) usando fetch.
-   */
-  async function loadAndStructureData() {
-    try {
-        // 🔑 El corazón del cambio: Carga el archivo JSON
-        const response = await fetch('Peliculas.json');
-        
-        if (!response.ok) {
-            throw new Error(`Error ${response.status}: Archivo Peliculas.json no encontrado o inaccesible.`);
-        }
+  // Cargar JSON
+  fetch('Peliculas.json')
+    .then(res => res.json())
+    .then(data => {
+      moviesData = data;
+      renderMovies(moviesData);
 
-        const data = await response.json();
-        
-        // 1. Cargar todos los datos
-        allMoviesData = data;
+      // ✅ MOSTRAR TOTAL REAL
+      totalCount.textContent = data.length + " títulos";
+    });
 
-        // 2. Limpiar y re-estructurar datos por categoría
-        categoriesOrder.forEach(cat => { structuredMoviesData[cat] = []; });
-
-        allMoviesData.forEach(movie => {
-            const category = determineCategory(movie);
-            if (structuredMoviesData[category]) {
-                structuredMoviesData[category].push(movie);
-            } else {
-                structuredMoviesData["EN TENDENCIA"].push(movie);
-            }
-        });
-
-        // 3. Asegurar que 'EN TENDENCIA' tenga algunas películas destacadas
-        allMoviesData.slice(0, 5).forEach(movie => {
-            const isAlreadyInTrending = structuredMoviesData["EN TENDENCIA"].some(m => m.title === movie.title);
-            if (!isAlreadyInTrending) {
-                 structuredMoviesData["EN TENDENCIA"].unshift(movie);
-            }
-        });
-
-    } catch (error) {
-        console.error("Fallo al cargar o procesar el JSON:", error);
-        mainContent.innerHTML = `<p style="text-align: center; color: #e81c1c; padding: 20px;">
-          ❌ Error crítico al cargar los datos. **Verifica que Peliculas.json esté en la misma carpeta.**
-        </p>`;
-    }
-  }
-
-  /** Crea la tarjeta visual de una película. */
-  function createMovieCard(movie) {
-    const a = document.createElement('a');
-    a.className = 'movie-card';
-    a.href = movie.link || '#'; 
-    a.dataset.title = movie.title || 'Título Desconocido';
-    const posterUrl = movie.poster || 'https://placehold.co/120x180/444/fff?text=No+Poster';
-    a.style.backgroundImage = `url('${posterUrl}')`; 
-    a.setAttribute('aria-label', `Ver ${movie.title}`);
-    a.setAttribute('onerror', `this.style.backgroundImage='url("https://placehold.co/120x180/444/fff?text=No+Poster")'`);
-
-    const span = document.createElement('span');
-    span.className = 'quality-tag';
-    span.textContent = movie.quality || 'N/A'; 
-
-    a.appendChild(span);
-    return a;
-  }
-
-  /** Renderiza la lista de tarjetas en un contenedor. */
-  function renderMovieList(container, movies) {
-    container.innerHTML = '';
+  function renderMovies(movies) {
+    movieList.innerHTML = '';
     movies.forEach(movie => {
-      container.appendChild(createMovieCard(movie));
+      const a = document.createElement('a');
+      a.className = 'movie-card';
+      a.href = movie.link;
+      a.style.backgroundImage = `url('${movie.poster}')`;
+
+      const q = document.createElement('span');
+      q.className = 'quality-tag';
+      q.textContent = movie.quality || 'HD';
+
+      a.appendChild(q);
+      movieList.appendChild(a);
     });
   }
 
-  /** Renderiza todas las secciones de categorías. */
-  function renderCategories() {
-    mainContent.innerHTML = '';
-    
-    categoriesOrder.forEach(category => {
-      const movies = structuredMoviesData[category] || []; 
-      
-      const section = document.createElement('div');
-      section.className = 'category-section';
-
-      const title = document.createElement('h2');
-      title.className = 'category-title';
-      title.textContent = category.toUpperCase();
-
-      const listContainer = document.createElement('div');
-      listContainer.className = 'movies-list';
-
-      renderMovieList(listContainer, movies);
-
-      section.appendChild(title);
-      section.appendChild(listContainer);
-      mainContent.appendChild(section);
-    });
-  }
-
-  // Evento para el buscador
+  // Buscador (no cambia el contador)
   searchInput.addEventListener('input', () => {
-    const query = searchInput.value.toLowerCase().trim();
-
-    if (query.length > 0) {
-      mainContent.style.display = 'none';
-      searchResults.style.display = 'grid'; 
-
-      const filtered = allMoviesData.filter(movie => 
-        movie.title.toLowerCase().includes(query)
-      );
-
-      if (filtered.length > 0) {
-        renderMovieList(searchResults, filtered);
-      } else {
-        searchResults.innerHTML = '<p style="padding: 10px; text-align: center; color: #999;">No se encontraron resultados para su búsqueda.</p>';
-      }
-
-    } else {
-      mainContent.style.display = 'block';
-      searchResults.style.display = 'none';
-      renderCategories(); 
-    }
-  });
-
-  // Inicialización: Cargar datos y renderizar
-  window.addEventListener('load', async () => {
-    // 1. Cargar el JSON (de forma asíncrona)
-    await loadAndStructureData(); 
-    
-    // 2. Renderizar contenido
-    renderCategories(); 
-
-    // Restaurar posición del scroll
-    const scrollPos = sessionStorage.getItem("scrollPos");
-    if (scrollPos) {
-      setTimeout(() => {
-        window.scrollTo(0, parseInt(scrollPos));
-      }, 100);
-    }
-  });
-
-  window.addEventListener("beforeunload", () => {
-    sessionStorage.setItem("scrollPos", window.scrollY);
+    const q = searchInput.value.toLowerCase();
+    const filtered = moviesData.filter(m =>
+      m.title.toLowerCase().includes(q)
+    );
+    renderMovies(filtered);
   });
 </script>
+
 </body>
-  </html>
+</html>
